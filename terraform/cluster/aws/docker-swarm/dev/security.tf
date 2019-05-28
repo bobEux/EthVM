@@ -137,7 +137,7 @@ resource "aws_security_group" "efs" {
 
     cidr_blocks = ["${aws_subnet.subnet-managers.cidr_block}", "${aws_subnet.subnet-workers.cidr_block}"]
   }
-
+  
   tags {
     Name = "allow_nfs-workers-managers"
   }

@@ -23,7 +23,7 @@ resource "aws_instance" "manager" {
     timeout     = "${var.connection_timeout}"
   }
 
-  provisioner "file" "key_file" {
+  provisioner "file" {
     source      = "${var.ssh_key_path}"
     destination = "~/key.pem"
   }

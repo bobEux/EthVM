@@ -8,6 +8,7 @@ resource "aws_route53_zone" "ethvm" {
   tags {
     Name = "ethvm hosted zone"
   }
+
 }
 
 resource "aws_route53_record" "eth_client" {
@@ -28,7 +29,7 @@ resource "aws_route53_record" "manager" {
   ttl     = "30"
 
   records = [
-    "${module.managers.root_manager.private_ip}",
+    "${module.managers.root_manager_private_ip}",
   ]
 }
 

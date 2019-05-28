@@ -1,10 +1,10 @@
 terraform {
   backend "s3" {
     encrypt        = true
-    bucket         = "ethvm-terraform-remote"
+    bucket         = "pillar-sandbox-release-eu-west-2-007308900042"
     dynamodb_table = "terraform-state-lock-dynamo"
-    region         = "us-west-2"
-    key            = "dev/terraform.tfstate"
-    profile        = "ethvm-terraform"
+    region         = "eu-west-2"
+    key            = "dev/ethvm.tfstate"
+    profile        = "sandbox"
   }
 }

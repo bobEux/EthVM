@@ -42,7 +42,7 @@ module "workers" {
   total_instances      = "${var.total_worker_instances}"
   provision_user       = "${var.provision_user}"
   manager_public_ip    = "${aws_eip.manager-ip.public_ip}"
-  manager_private_ip   = "${module.managers.root_manager.private_ip}"
+  manager_private_ip   = "${module.managers.root_manager_private_ip}"
   swarm_tokens         = "${module.managers.swarm_tokens}"
   efs_mount_target_dns = "${module.efs.mount_target_dns}"
 }
@@ -55,7 +55,7 @@ module "ethclient" {
   security_group    = "${aws_security_group.ingress-worker.id}"
   key_name          = "${var.ssh_key_name}"
   subnet_id         = "${aws_subnet.subnet-workers.id}"
-  ethstats_server   = "${module.managers.root_manager.private_ip}"
+  ethstats_server   = "${module.managers.root_manager_private_ip}"
   ethstats_secret   = "${var.ethstats_secret}"
   client_image      = "${var.eth_client_docker_image}"
   volume_size       = "${var.eth_client_volume_size}"

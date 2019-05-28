@@ -6,6 +6,7 @@ resource "aws_vpc" "docker-swarm-vpc" {
   tags {
     Name = "docker-swarm"
   }
+
 }
 
 resource "aws_subnet" "subnet-managers" {
@@ -25,7 +26,7 @@ resource "aws_internet_gateway" "internet-gateway" {
 }
 
 resource "aws_eip" "manager-ip" {
-  instance = "${module.managers.root_manager.id}"
+  instance = "${module.managers.root_manager_id}"
   vpc      = true
 }
 

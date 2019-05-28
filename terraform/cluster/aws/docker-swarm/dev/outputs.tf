@@ -1,4 +1,4 @@
-output "root_manager.ip" {
+output "root_manager_ip" {
   value = "${aws_eip.manager-ip.public_ip}"
 }
 

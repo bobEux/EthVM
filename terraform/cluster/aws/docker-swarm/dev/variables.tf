@@ -1,3 +1,4 @@
+
 variable "version" {
   description = "Terraform deployment version"
   default     = "0.0.1"
@@ -10,20 +11,22 @@ variable "shared_credentials_file" {
 
 variable "aws_profile" {
   description = "Your AWS profile"
-  default     = "ethvm-terraform"
+  default     = "sandbox"
 }
 
 variable "region" {
   description = "Your AWS region"
-  default     = "us-east-2"
+  default     = "eu-west-2"
 }
 
 variable "ssh_key_name" {
   description = "Your AWS key pair name"
+  default = "keyname"
 }
 
 variable "ssh_key_path" {
   description = "Your AWS key path, path to .pem file"
+  default = "/tmp/ssh_keys"
 }
 
 variable "connection_timeout" {
@@ -33,17 +36,17 @@ variable "connection_timeout" {
 
 variable "ec2_ami_manager" {
   description = "AMI for EC2 instance"
-  default     = "ami-0edb6536b94aa8642"
+  default     = "ami-03df12b73c541eb68"
 }
 
 variable "ec2_ami_worker" {
   description = "AMI for EC2 instance"
-  default     = "ami-0edb6536b94aa8642"
+  default     = "ami-03df12b73c541eb68"
 }
 
 variable "ec2_ami_ethereum_client" {
   description = "AMI for EC2 ethereum client"
-  default     = "ami-0edb6536b94aa8642"
+  default     = "ami-03df12b73c541eb68"
 }
 
 variable "ec2_instance_type_manager" {

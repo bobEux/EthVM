@@ -1,6 +1,6 @@
 variable "region" {
   description = "Your AWS region"
-  default     = "us-east-2"
+  default     = "eu-west-2"
 }
 
 variable "shared_credentials_file" {
@@ -10,7 +10,7 @@ variable "shared_credentials_file" {
 
 variable "aws_profile" {
   description = "Your AWS profile"
-  default     = "ethvm-terraform"
+  default     = "sandbox"
 }
 
 variable "terraform_state_storage_s3" {

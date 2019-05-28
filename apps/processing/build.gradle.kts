@@ -22,6 +22,7 @@ allprojects {
     maven("https://oss.sonatype.org/content/repositories/releases/")
     maven("https://dl.bintray.com/enkryptio/maven/")
     maven("https://dl.bintray.com/ethereum/maven/")
+    //maven("https://pillarproject.jfrog.io/pillarproject")
   }
 
   tasks.withType<KotlinCompile> {

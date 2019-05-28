@@ -33,7 +33,6 @@ resource "aws_instance" "secondary-manager" {
   subnet_id                   = "${var.subnet_id}"
   source_dest_check           = false
   count                       = "${var.total_instances -1}"
-  depends_on                  = ["aws_instance.manager"]
   associate_public_ip_address = true
   user_data                   = "${format("%s\n%s\n%s",data.local_file.install_docker.content, element(data.template_file.user_data.*.rendered, count.index), data.template_file.efs_mount.rendered)}"
 

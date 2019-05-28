@@ -31,6 +31,9 @@ dependencies {
   // Mongo
   implementation("org.mongodb:mongodb-driver-sync:3.10.1")
 
+  //kinesis
+  implementation("com.amazon.kinesis.kinesis-kafka-connector:0.0.9")
+
   // Web3
   implementation("org.web3j:parity:4.0.3")
 
