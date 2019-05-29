@@ -1,0 +1,86 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+    #  - run:
+    #      name: Install globally required system toolchain
+    #      command: sudo npm i -g eslint eslint-plugin-jest eslint-config-airbnb-base eslint-plugin-import jest recursive-install && npm-recursive-install
+    #  - run:
+    #      name: Run linting
+    #      command: cd microservices && eslint . --ignore-pattern node_modules
+    #  - run:
+    #      name: Run tests
+    #      command: cd microservices && jest
+  terraform_plan:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run:
+          name: Install and download globally required system toolchain
+          command: sudo apt-get install unzip && wget https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+      - run:
+          name: Install and download globally required microservice packages
+          command: sudo npm i -g recursive-install && npm-recursive-install
+      - run:
+          name: Unzip Terraform
+          command: unzip terraform_0.11.13_linux_amd64.zip
+      - run:
+          name: Move to local binaries directory
+          command: sudo mv terraform /usr/local/bin/
+      - run:
+          name: Check Terraform version
+          command: terraform -v
+      - run:
+          name: Run Terraform initialisation
+          command: cd terraform/cluster/aws/docker-swarm/dev && terraform init
+      - run:
+          name: Run Terraform plan
+          command: cd terraform/cluster/aws/docker-swarm/dev && terraform plan
+  terraform_apply:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run:
+          name: Install and download globally required system toolchain
+          command: sudo apt-get install unzip && wget https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+      - run:
+          name: Install and download globally required microservice packages
+          command: sudo npm i -g recursive-install && npm-recursive-install
+      - run:
+          name: Unzip Terraform
+          command: unzip terraform_0.11.13_linux_amd64.zip
+      - run:
+          name: Move to local binaries directory
+          command: sudo mv terraform /usr/local/bin/
+      - run:
+          name: Check Terraform version
+          command: terraform -v
+      - run:
+          name: Run Terraform initialisation
+          command: cd terraform/cluster/aws/docker-swarm/dev && terraform init
+      - run:
+          name: Run Terraform apply
+          command: cd terraform/cluster/aws/docker-swarm/dev && terraform apply -auto-approve
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - terraform_plan:
+          requires:
+             - build
+      - terraform_apply:
+          requires:
+             - build
+             - terraform_plan
+          filters:
+            branches:
+              only:
